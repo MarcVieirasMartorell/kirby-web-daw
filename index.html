@@ -1,1 +1,57 @@
-<p>Helo</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Mundo de Kirby</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>El Mundo de Kirby</h1>
+
+        <!-- Kirby -->
+        <div class="kirby-container">
+            <div class="kirby-wrapper" id="kirby-drop-zone">
+                <img id="kirby-image" src="https://i.ibb.co/qLLbvsMZ/imagen-2025-02-14-175515993.png" alt="Kirby">
+            </div>
+            <p id="kirby-description">¡Arrastra un enemigo hacia Kirby para que copie sus poderes!</p>
+        </div>
+
+        <!-- Enemies -->
+        <div class="enemies-grid">
+            <div class="enemy" draggable="true" data-power="sword">
+                <img src="images/blade_knight.png" alt="Sword Enemy" class="enemy-image">
+                <span>Blade Knight</span>
+            </div>
+            <div class="enemy" draggable="true" data-power="cutter">
+                <img src="images/sir_kibble.png" alt="Star Enemy" class="enemy-image">
+                <span>Sir Kibble</span>
+            </div>
+            <div class="enemy" draggable="true" data-power="sleep">
+                <img src="images/noddy.png" alt="Sleep Enemy" class="enemy-image">
+                <span>Noddy</span>
+            </div>
+            <div class="enemy" draggable="true" data-power="beam">
+                <img src="images/waddle_doo.webp" alt="Thunder Enemy" class="enemy-image">
+                <span>Waddle Doo</span>
+            </div>
+        </div>
+
+        <!-- Info Card -->
+        <div class="info-card">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                Sobre Kirby
+            </h2>
+            <p>
+                Kirby es un adorable héroe rosado creado por Masahiro Sakurai para Nintendo. 
+                Su habilidad más característica es poder copiar las habilidades de sus enemigos 
+                al inhalarlos. A pesar de su apariencia tierna, ¡es uno de los guerreros más 
+                poderosos del universo Nintendo!
+            </p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

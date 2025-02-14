@@ -1,0 +1,131 @@
+:root {
+    --pink-600: #db2777;
+    --gray-700: #374151;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #dbeafe, #fce7f3);
+    padding: 2rem;
+}
+
+.container {
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--pink-600);
+}
+
+.kirby-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.kirby-wrapper {
+    width: 12rem;
+    height: 12rem;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.kirby-wrapper.dragover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(219, 39, 119, 0.3);
+}
+
+#kirby-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease-in-out;
+}
+
+#kirby-description {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.enemies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .enemies-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.enemy {
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.enemy:hover {
+    transform: scale(1.05);
+}
+
+.enemy.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.enemy-image {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: contain;
+}
+
+.enemy span {
+    font-weight: 500;
+    text-align: center;
+    color: var(--gray-700);
+}
+
+.info-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--pink-600);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-card p {
+    color: var(--gray-700);
+    line-height: 1.7;
+}

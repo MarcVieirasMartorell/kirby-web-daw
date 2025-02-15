@@ -27,9 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         description: '¡Arrastra un enemigo hacia Kirby para que copie sus poderes!'
     };
 
-    // Nueva imagen de Kirby con la boca abierta
     const kirbyMouthOpen = {
-        image: 'images/kirby_open.png', // Necesitamos una imagen de Kirby con la boca abierta
+        image: 'images/kirby_open.png',
         description: '¡Suelta el enemigo para que Kirby copie sus poderes!'
     };
 
@@ -43,6 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Crear un elemento fantasma para el arrastre
+    const createDragGhost = (enemy) => {
+        const ghost = enemy.cloneNode(true);
+        ghost.classList.add('enemy-ghost');
+        ghost.style.position = 'fixed';
+        ghost.style.pointerEvents = 'none';
+        ghost.style.zIndex = '1000';
+        ghost.style.opacity = '1';
+        document.body.appendChild(ghost);
+        return ghost;
+    };
+
+    // Actualizar la posición del elemento fantasma
+    const updateGhostPosition = (ghost, e) => {
+        if (ghost && e.clientX && e.clientY) {
+            const rect = ghost.getBoundingClientRect();
+            ghost.style.left = `${e.clientX - rect.width / 2}px`;
+            ghost.style.top = `${e.clientY}px`;
+        }
+    };
+
     // Prevenir el comportamiento por defecto del navegador para permitir el drop
     document.addEventListener('dragover', (e) => e.preventDefault());
     document.addEventListener('drop', (e) => e.preventDefault());
@@ -55,13 +75,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Drag and Drop functionality
     enemies.forEach(enemy => {
+        let ghostElement = null;
+
         enemy.addEventListener('dragstart', (e) => {
-            enemy.classList.add('dragging');
             e.dataTransfer.setData('power', enemy.dataset.power);
+            
+            // Crear el elemento fantasma inmediatamente
+            ghostElement = createDragGhost(enemy);
+            updateGhostPosition(ghostElement, e);
+            
+            // Configurar una imagen transparente para el drag nativo
+            const img = new Image();
+            img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+            e.dataTransfer.setDragImage(img, 0, 0);
+            
+            enemy.style.opacity = '0';
+        });
+
+        enemy.addEventListener('drag', (e) => {
+            if (e.clientX !== 0 && e.clientY !== 0) { // Ignorar eventos con coordenadas 0
+                updateGhostPosition(ghostElement, e);
+            }
         });
 
         enemy.addEventListener('dragend', () => {
-            enemy.classList.remove('dragging');
+            enemy.style.opacity = '1';
+            if (ghostElement) {
+                ghostElement.remove();
+                ghostElement = null;
+            }
         });
     });
 
@@ -77,14 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
     kirbyDropZone.addEventListener('dragover', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // Asegurarse de que la imagen de boca abierta se mantenga
         if (kirbyImage.src !== kirbyMouthOpen.image) {
             kirbyImage.src = kirbyMouthOpen.image;
         }
     });
 
     kirbyDropZone.addEventListener('dragleave', (e) => {
-        // Verificar si realmente salimos del drop zone y no de un elemento hijo
         const rect = kirbyDropZone.getBoundingClientRect();
         const x = e.clientX;
         const y = e.clientY;

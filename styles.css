@@ -91,8 +91,37 @@ h1 {
 }
 
 .enemy.dragging {
-    opacity: 0.5;
-    cursor: grabbing;
+    opacity: 0;
+}
+
+.enemy-ghost {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.1s ease-out;
+    transform-origin: top center;
+    animation: swing 2s ease-in-out infinite;
+}
+    
+@keyframes swing {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.enemy-ghost .enemy-image {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: contain;
+}
+
+.enemy-ghost span {
+    display: none;
 }
 
 .enemy-image {

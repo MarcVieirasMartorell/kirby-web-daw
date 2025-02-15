@@ -3,33 +3,33 @@ document.addEventListener('DOMContentLoaded', () => {
         { 
             name: 'sword',
             image: 'images/kirby_sword.png',
-            description: '¡Kirby obtuvo el poder de la espada!'
+            description: 'Kirby got the power to wild a mighty sword!'
         },
         { 
             name: 'cutter',
             image: 'images/kirby_cutter.png',
-            description: '¡Kirby obtuvo el poder de cortar!'
+            description: 'Kirby got the power to throw cutting boomerangs!'
         },
         { 
             name: 'sleep',
             image: 'images/kirby_sleep.png',
-            description: '¡Kirby está durmiendo!'
+            description: 'Kirby is sleeping, shhh...'
         },
         { 
             name: 'beam',
             image: 'images/kirby_beam.png',
-            description: '¡Kirby obtuvo el poder del rayo!'
+            description: 'Kirby got the power to beam... well, beams!'
         }
     ];
 
     const normalKirby = {
         image: 'images/kirby_base.png',
-        description: '¡Arrastra un enemigo hacia Kirby para que copie sus poderes!'
+        description: 'Drag an enemy into Kirby for him to swallow them!'
     };
 
     const kirbyMouthOpen = {
         image: 'images/kirby_open.png',
-        description: '¡Suelta el enemigo para que Kirby copie sus poderes!'
+        description: 'Drop the enemy!'
     };
 
     const kirbyImage = document.getElementById('kirby-image');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const enemies = document.querySelectorAll('.enemy');
 
     if (!kirbyImage || !kirbyDescription || !kirbyDropZone) {
-        console.error('No se encontraron los elementos necesarios');
+        console.error("Couldn't find the necessary elements");
         return;
     }
 
